@@ -8,9 +8,9 @@
 
 #define BLOCKS  1024//512
 #define NUMTHREADS 30000//8192
-#define TAM 4.5e2
+#define TAM 4.5e4
 
-void lcs_cuda(char *a, char *b, int m, int n, block_count, thread_count);
+void lcs_cuda(char *a, char *b, int m, int n, int block_count, int thread_count);
 char *alfabetoCadenas(char *alfab, char *a, int n);
 char *adicionarChar(char *str, char caracter);
 int buscarIndice(char *cadena, char a);
@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
 {   
     for(int block_count = 1; block_count <= BLOCKS; block_count = block_count * 2){
         for(int thread_count= 1 ; thread_count <= NUMTHREADS; thread_count = thread_count * 2 ){
-            for (int i = 2; i <= TAM_MAX;){
+            for (int i = 2; i <= TAM;){
                 double begin = omp_get_wtime();
                 //char *a = "ABMDEBMA";
                 //char *b = "ABACAEMC";
@@ -97,7 +97,7 @@ int main(int argc, char *argv[])
  * (Longest Common Subsequence, LCS) entre dos cadenas de
  * caracteres: a de tamaño m y b de tamaño n, y la imprime.
 */
-void lcs_cuda(char *a, char *b, int m, int n, block_count, thread_count)
+void lcs_cuda(char *a, char *b, int m, int n, int block_count, int thread_count)
 {
     // Alfabeto de las dos cadenas
     char *alfabeto = "";
