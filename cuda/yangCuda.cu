@@ -72,8 +72,9 @@ int main(int argc, char *argv[])
             //for (int i = 2; i <= TAM;){
 
                 int threadsPerBlock = thread_count/block_count;
+                printf("TB;%d\n", threadsPerBlock);
                 if(threadsPerBlock <= MAX_THREADS_BLOCK){
-                    
+
                     double begin = omp_get_wtime();
                     //char *a = "ABMDEBMA";
                     //char *b = "ABACAEMC";
