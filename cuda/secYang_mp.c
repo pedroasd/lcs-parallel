@@ -30,7 +30,8 @@ int main(void)
             char *b = rand_string_alloc(i);
             int m = strlen(a);
             int n = strlen(b);
-            lcs_openmp(a, b, m, n, thread_count);
+            //lcs_openmp(a, b, m, n, thread_count);
+            lcs(a, b, m, n);
             free(a);
             free(b);
 
@@ -272,7 +273,7 @@ void lcs_openmp(char *a, char *b, int m, int n, int thread_count)
     //printf("Programación dinámica\n");
 
     // Impresión de tabla resultado de programación dinámica.
-    int k = 0;
+    /*int k = 0;
     for (int i = 0; i <= m; i++)
     {
         for (int j = 0; j <= n; j++)
@@ -281,7 +282,7 @@ void lcs_openmp(char *a, char *b, int m, int n, int thread_count)
             k++;
         }
         printf("\n");
-    }
+    }*/
 
     // IMPRESIÓN DE LA CADENA
     // Longitud máxima de LCS
@@ -313,7 +314,7 @@ void lcs_openmp(char *a, char *b, int m, int n, int thread_count)
     }
 
     // Imprime el resultado.
-    printf("Subsecuencia común más larga entre:\n C1: %s\n y C2: %s\n es %s\n", a, b, lcs);
+    //printf("Subsecuencia común más larga entre:\n C1: %s\n y C2: %s\n es %s\n", a, b, lcs);
 
     //printf("Tamaño: %ld\n", strlen(lcs));
     free(mres);
