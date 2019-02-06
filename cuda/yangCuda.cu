@@ -87,7 +87,7 @@ int main(int argc, char *argv[])
 void lcs(char *a, char *b, int m, int n)
 {
     // Alfabeto de las dos cadenas
-    char *alfabeto;
+    char *alfabeto, *d_b, *d_alfabeto;;
     alfabeto = alfabetoCadenas(alfabeto, a, m);
     alfabeto = alfabetoCadenas(alfabeto, b, n);
     int l = strlen(alfabeto);
@@ -100,8 +100,6 @@ void lcs(char *a, char *b, int m, int n)
     mpre = (int *)malloc(sz_mpre);
     
     cudaError_t err = cudaSuccess;
-
-    char *d_b, *d_alfabeto;
 
     err = cudaMalloc((void **)&d_mpre, sz_mpre);
     if (err != cudaSuccess){
