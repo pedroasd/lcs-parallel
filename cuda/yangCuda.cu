@@ -69,32 +69,35 @@ int main(int argc, char *argv[])
     for(int block_count = 2; block_count <= BLOCKS; block_count = block_count * 2){
         for(int thread_count= block_count; thread_count <= NUMTHREADS; thread_count = thread_count * 2 ){
             for (int i = 8; i <= TAM;){
-                double begin = omp_get_wtime();
-                //char *a = "ABMDEBMA";
-                //char *b = "ABACAEMC";
-                char *a = rand_string_alloc(i);
-                char *b = rand_string_alloc(i);
-                int m = strlen(a);
-                int n = strlen(b);
 
                 int threadsPerBlock = thread_count/block_count;
                 if(threadsPerBlock <= MAX_THREADS_BLOCK){
+
+                    double begin = omp_get_wtime();
+                    //char *a = "ABMDEBMA";
+                    //char *b = "ABACAEMC";
+                    char *a = rand_string_alloc(i);
+                    char *b = rand_string_alloc(i);
+                    int m = strlen(a);
+                    int n = strlen(b);
+                    
                     //printf("B;%d;N;%d;I;%d\n", block_count,thread_count, i);
                     lcs_cuda(a, b, m, n, block_count, thread_count);
-                }
-                free(a);
-                free(b);
-                double end = omp_get_wtime();
-                double time_spent = end - begin;
-                
-                printf("B;%d;N;%d;I;%d;T;%f\n", block_count,thread_count, i, time_spent);
-                if (i > 2048)
-                    i += 5000;
-                else
-                {
-                    i = i * 2;
+                    
+                    free(a);
+                    free(b);
+                    double end = omp_get_wtime();
+                    double time_spent = end - begin;
+                    
+                    printf("B;%d;N;%d;I;%d;T;%f\n", block_count,thread_count, i, time_spent);
                     if (i > 2048)
-                        i = 5000;
+                        i += 5000;
+                    else
+                    {
+                        i = i * 2;
+                        if (i > 2048)
+                            i = 5000;
+                    }
                 }
             }
         }
