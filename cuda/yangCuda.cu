@@ -63,7 +63,7 @@ __global__ void matrizResultado(int *mpre, int *mres, int indiceAlfabeto, long i
 int main(int argc, char *argv[])
 {   
     for(int block_count = 2; block_count <= BLOCKS; block_count = block_count * 2){
-        for(int thread_count= 2; thread_count <= NUMTHREADS; thread_count = thread_count * 2 ){
+        for(int thread_count= 2; thread_count <= TAM; thread_count = thread_count * 2 ){
             for (int i = 2; i <= TAM;){
                 double begin = omp_get_wtime();
                 //char *a = "ABMDEBMA";
