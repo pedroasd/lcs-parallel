@@ -8,7 +8,7 @@
 
 #define BLOCKS  1024//512
 #define NUMTHREADS 30000//8192
-#define TAM 4.5e4
+#define TAM 4.5e3
 
 void lcs_cuda(char *a, char *b, int m, int n, int block_count, int thread_count);
 char *alfabetoCadenas(char *alfab, char *a, int n);
