@@ -76,7 +76,7 @@ int main(int argc, char *argv[])
                 int m = strlen(a);
                 int n = strlen(b);
 
-                printf("B;%d;N;%d;I;%d\n", block_count,thread_count, i);
+                //printf("B;%d;N;%d;I;%d\n", block_count,thread_count, i);
                 lcs_cuda(a, b, m, n, block_count, thread_count);
                 //free(a);
                 //free(b);
@@ -199,7 +199,7 @@ void lcs_cuda(char *a, char *b, int m, int n, int block_count, int thread_count)
 
         int threadsPerBlock = thread_count/block_count;
         int threads = block_count * threadsPerBlock;
-        matrizResultado<<< BLOCKS,threadsPerBlock >>>(d_mpre, d_mres, indiceAlfabeto, i, n, threads);
+        matrizResultado<<< block_count,threadsPerBlock >>>(d_mpre, d_mres, indiceAlfabeto, i, n, threads);
         err = cudaGetLastError();
         if (err != cudaSuccess){
             fprintf(stderr, "Failed to launch preprocesamiento kernel (error code %s)!\n", cudaGetErrorString(err));
