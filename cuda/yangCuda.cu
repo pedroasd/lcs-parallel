@@ -6,8 +6,8 @@
 // For the CUDA runtime routines (prefixed with "cuda_")
 #include <cuda_runtime.h>
 
-#define BLOCKS  1024//512
-#define NUMTHREADS 30000//8192
+#define BLOCKS  512
+#define NUMTHREADS 8192
 #define TAM 4.5e3
 
 void lcs_cuda(char *a, char *b, int m, int n, int block_count, int thread_count);
@@ -62,6 +62,9 @@ __global__ void matrizResultado(int *mpre, int *mres, int indiceAlfabeto, long i
  */
 int main(int argc, char *argv[])
 {   
+    //int i = TAM;
+    //int block_count = BLOCKS;
+    //int thread_count = NUMTHREADS
     for(int block_count = 2; block_count <= BLOCKS; block_count = block_count * 2){
         for(int thread_count= 2; thread_count <= TAM; thread_count = thread_count * 2 ){
             for (int i = 2; i <= TAM;){
