@@ -68,7 +68,7 @@ int main(int argc, char *argv[])
     //int thread_count = NUMTHREADS;
     for(int block_count = 2; block_count <= BLOCKS; block_count = block_count * 2){
         for(int thread_count= block_count; thread_count <= NUMTHREADS; thread_count = thread_count * 2 ){
-            for (int i = 8; i <= TAM;){
+            for (int i = 2; i <= TAM;){
 
                 int threadsPerBlock = thread_count/block_count;
                 if(threadsPerBlock <= MAX_THREADS_BLOCK){
