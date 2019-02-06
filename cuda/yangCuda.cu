@@ -199,6 +199,7 @@ void lcs_cuda(char *a, char *b, int m, int n, int block_count, int thread_count)
 
         int threadsPerBlock = thread_count/block_count;
         int threads = block_count * threadsPerBlock;
+        printf("B;%d;N;%d;\n", block_count,threadsPerBlock);
         matrizResultado<<< block_count,threadsPerBlock >>>(d_mpre, d_mres, indiceAlfabeto, i, n, threads);
         err = cudaGetLastError();
         if (err != cudaSuccess){
