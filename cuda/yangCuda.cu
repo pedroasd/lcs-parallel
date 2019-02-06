@@ -90,15 +90,17 @@ int main(int argc, char *argv[])
                     double time_spent = end - begin;
                     
                     printf("B;%d;N;%d;I;%d;T;%f\n", block_count,thread_count, i, time_spent);
-                    if (i > 2048)
-                        i += 5000;
-                    else
-                    {
-                        i = i * 2;
-                        if (i > 2048)
-                            i = 5000;
-                    }
                 }
+                
+                if (i > 2048)
+                    i += 5000;
+                else
+                {
+                    i = i * 2;
+                    if (i > 2048)
+                        i = 5000;
+                }
+                
             }
         }
     }
