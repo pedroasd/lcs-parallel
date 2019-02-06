@@ -63,16 +63,17 @@ __global__ void matrizResultado(int *mpre, int *mres, int indiceAlfabeto, long i
  */
 int main(int argc, char *argv[])
 {   
-    //int i = TAM;
-    //int block_count = BLOCKS;
-    int thread_count = NUMTHREADS;
-    for(int block_count = 2; block_count <= BLOCKS; block_count = block_count * 2){
+    int i = TAM;
+    int block_count = BLOCKS;
+    //int thread_count = NUMTHREADS;
+    int thread_count = TAM/2;
+    //for(int block_count = 2; block_count <= BLOCKS; block_count = block_count * 2){
         //for(int thread_count= block_count; thread_count <= NUMTHREADS; thread_count = thread_count * 2 ){
-            for (int i = 2; i <= TAM;){
+            //for (int i = 2; i <= TAM;){
 
-                int threadsPerBlock = thread_count/block_count;
+                /*int threadsPerBlock = thread_count/block_count;
                 if(threadsPerBlock <= MAX_THREADS_BLOCK){
-
+*/
                     double begin = omp_get_wtime();
                     //char *a = "ABMDEBMA";
                     //char *b = "ABACAEMC";
@@ -92,7 +93,7 @@ int main(int argc, char *argv[])
                     double time_spent = end - begin;
                     
                     printf("B;%d;N;%d;I;%d;T;%f\n", block_count,thread_count, i, time_spent);
-                }
+                //}
 
                 if (i > 2048)
                     i += 5000;
@@ -103,9 +104,9 @@ int main(int argc, char *argv[])
                         i = 5000;
                 }
                 
-            }
+            //}
         //}
-    }
+    //}
     return 0;
 }
 
