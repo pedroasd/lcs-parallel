@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
         for(int thread_count= block_count; thread_count <= NUMTHREADS; thread_count = thread_count * 2 ){
             //for (int i = 2; i <= TAM;){
 
-                /*int threadsPerBlock = thread_count/block_count;
+                int threadsPerBlock = thread_count/block_count;
                 if(threadsPerBlock <= MAX_THREADS_BLOCK){
 */
                     double begin = omp_get_wtime();
@@ -93,7 +93,7 @@ int main(int argc, char *argv[])
                     double time_spent = end - begin;
                     
                     printf("B;%d;N;%d;I;%d;T;%f\n", block_count,thread_count, i, time_spent);
-                //}
+                }
 
                 if (i > 2048)
                     i += 5000;
