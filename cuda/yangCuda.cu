@@ -10,7 +10,7 @@
 #define NUMTHREADS 8192
 #define TAM 4.5e2
 
-void lcs(char *a, char *b, int m, int n);
+void lcs_cuda(char *a, char *b, int m, int n);
 char *alfabetoCadenas(char *alfab, char *a, int n);
 char *adicionarChar(char *str, char caracter);
 int buscarIndice(char *cadena, char a);
@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
     char *b = rand_string_alloc(TAM);
     int m = strlen(a);
     int n = strlen(b);
-    lcs(a, b, m, n);
+    lcs_cuda(a, b, m, n);
     //free(a);
     //free(b);
     double end = omp_get_wtime();
@@ -84,7 +84,7 @@ int main(int argc, char *argv[])
  * (Longest Common Subsequence, LCS) entre dos cadenas de
  * caracteres: a de tamaño m y b de tamaño n, y la imprime.
 */
-void lcs(char *a, char *b, int m, int n)
+void lcs_cuda(char *a, char *b, int m, int n)
 {
     // Alfabeto de las dos cadenas
     char *alfabeto = "";
