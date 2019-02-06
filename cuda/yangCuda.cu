@@ -6,11 +6,11 @@
 // For the CUDA runtime routines (prefixed with "cuda_")
 #include <cuda_runtime.h>
 
-#define BLOCKS  512
-#define NUMTHREADS 8192
+#define BLOCKS  1024//512
+#define NUMTHREADS 30000//8192
 #define TAM 4.5e2
 
-void lcs_cuda(char *a, char *b, int m, int n);
+void lcs_cuda(char *a, char *b, int m, int n, block_count, thread_count);
 char *alfabetoCadenas(char *alfab, char *a, int n);
 char *adicionarChar(char *str, char caracter);
 int buscarIndice(char *cadena, char a);
@@ -62,21 +62,34 @@ __global__ void matrizResultado(int *mpre, int *mres, int indiceAlfabeto, long i
  */
 int main(int argc, char *argv[])
 {   
-    
-    double begin = omp_get_wtime();
-    //char *a = "ABMDEBMA";
-    //char *b = "ABACAEMC";
-    char *a = rand_string_alloc(TAM);
-    char *b = rand_string_alloc(TAM);
-    int m = strlen(a);
-    int n = strlen(b);
-    lcs_cuda(a, b, m, n);
-    //free(a);
-    //free(b);
-    double end = omp_get_wtime();
-    double time_spent = end - begin;
-    printf("T:%f\n", time_spent);
-    
+    for(int block_count = 1; block_count <= BLOCKS; block_count = block_count * 2){
+        for(int thread_count= 1 ; thread_count <= NUMTHREADS; thread_count = thread_count * 2 ){
+            for (int i = 2; i <= TAM_MAX;){
+                double begin = omp_get_wtime();
+                //char *a = "ABMDEBMA";
+                //char *b = "ABACAEMC";
+                char *a = rand_string_alloc(TAM);
+                char *b = rand_string_alloc(TAM);
+                int m = strlen(a);
+                int n = strlen(b);
+                lcs_cuda(a, b, m, n, block_count, thread_count);
+                //free(a);
+                //free(b);
+                double end = omp_get_wtime();
+                double time_spent = end - begin;
+                
+                printf("B;%d;N;%d;I;%d;T;%f\n", block_count,thread_count, i, time_spent);
+                if (i > 2048)
+                    i += 5000;
+                else
+                {
+                    i = i * 2;
+                    if (i > 2048)
+                        i = 5000;
+                }
+            }
+        }
+    }
     return 0;
 }
 
@@ -84,7 +97,7 @@ int main(int argc, char *argv[])
  * (Longest Common Subsequence, LCS) entre dos cadenas de
  * caracteres: a de tamaño m y b de tamaño n, y la imprime.
 */
-void lcs_cuda(char *a, char *b, int m, int n)
+void lcs_cuda(char *a, char *b, int m, int n, block_count, thread_count)
 {
     // Alfabeto de las dos cadenas
     char *alfabeto = "";
@@ -179,8 +192,8 @@ void lcs_cuda(char *a, char *b, int m, int n)
         int indiceAlfabeto = buscarIndice(alfabeto, *(a + i - 1));
 
 
-        int threadsPerBlock = NUMTHREADS/BLOCKS;
-        int threads = BLOCKS * threadsPerBlock;
+        int threadsPerBlock = thread_count/block_count;
+        int threads = block_count * threadsPerBlock;
         matrizResultado<<< BLOCKS,threadsPerBlock >>>(d_mpre, d_mres, indiceAlfabeto, i, n, threads);
         err = cudaGetLastError();
         if (err != cudaSuccess){
