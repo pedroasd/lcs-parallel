@@ -8,7 +8,7 @@
 
 #define BLOCKS  512
 #define NUMTHREADS 8192
-#define TAM 40000//4.5e3
+#define TAM 35000//4.5e3
 #define MAX_THREADS_BLOCK 1024
 
 void lcs_cuda(char *a, char *b, int m, int n, int block_count, int thread_count);
