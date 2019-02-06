@@ -8,7 +8,7 @@
 
 #define BLOCKS  512
 #define NUMTHREADS 8192
-#define TAM 4.5e5
+#define TAM 4.5e3
 #define MAX_THREADS_BLOCK 1024
 
 void lcs_cuda(char *a, char *b, int m, int n, int block_count, int thread_count);
@@ -198,7 +198,7 @@ void lcs_cuda(char *a, char *b, int m, int n, int block_count, int thread_count)
     int sz_mres = (m + 1) * (n + 1) * sizeof(int);
     mres = (int *)malloc(sz_mres);
 
-    err = cudaMallocManaged((void **)&d_mres, sz_mres);
+    err = cudaMalloc((void **)&d_mres, sz_mres);
     if (err != cudaSuccess){
         fprintf(stderr, "Failed to allocate device vector d_mres (error code %s)!\n", cudaGetErrorString(err));
         exit(EXIT_FAILURE);
