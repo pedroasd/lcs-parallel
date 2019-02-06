@@ -66,8 +66,8 @@ int main(int argc, char *argv[])
     int block_count = BLOCKS;
     int thread_count = NUMTHREADS;
     //for(int block_count = 2; block_count <= BLOCKS; block_count = block_count * 2){
-        //for(int thread_count= 2; thread_count <= TAM; thread_count = thread_count * 2 ){
-            //for (int i = 2; i <= TAM;){
+        for(int thread_count= 2; thread_count <= TAM; thread_count = thread_count * 2 ){
+            for (int i = 2; i <= TAM;){
                 double begin = omp_get_wtime();
                 //char *a = "ABMDEBMA";
                 //char *b = "ABACAEMC";
@@ -90,8 +90,8 @@ int main(int argc, char *argv[])
                     if (i > 2048)
                         i = 5000;
                 }
-            //}
-        //}
+            }
+        }
     //}
     return 0;
 }
