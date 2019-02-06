@@ -8,7 +8,7 @@
 
 #define BLOCKS  512
 #define NUMTHREADS 8192
-#define TAM 4.5e3
+#define TAM 1.5e4
 #define MAX_THREADS_BLOCK 1024
 
 void lcs_cuda(char *a, char *b, int m, int n, int block_count, int thread_count);
@@ -93,7 +93,7 @@ int main(int argc, char *argv[])
                     printf("B;%d;N;%d;I;%d;T;%f\n", block_count,thread_count, i, time_spent);
                 }
 
-                if (i > 2048)
+                /*if (i > 2048)
                     i += 5000;
                 else
                 {
@@ -101,7 +101,7 @@ int main(int argc, char *argv[])
                     if (i > 2048)
                         i = 5000;
                 }
-                
+                */
             //}
         }
     }
