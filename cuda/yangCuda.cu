@@ -84,7 +84,7 @@ int main(int argc, char *argv[])
                     
                     thread_count = n/2;
 
-                    //printf("B;%d;N;%d;I;%d\n", block_count,thread_count, i);
+                    printf("B;%d;N;%d;I;%d\n", block_count,thread_count, i);
                     lcs_cuda(a, b, m, n, block_count, thread_count);
                     
                     free(a);
@@ -207,6 +207,7 @@ void lcs_cuda(char *a, char *b, int m, int n, int block_count, int thread_count)
     int threadsPerBlock = thread_count/block_count;
     //int threadsPerBlock = (n/2)/block_count;
     int threads = block_count * threadsPerBlock;
+    printf("B;%d;N;%d;TB;%d\n", block_count,thread_count, threadsPerBlock);
 
     for (int i = 0; i <= m; i++)
     {
