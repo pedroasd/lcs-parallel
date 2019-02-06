@@ -68,7 +68,6 @@ int main(int argc, char *argv[])
     //char *b = "ABACAEMC";
     char *a = rand_string_alloc(TAM);
     char *b = rand_string_alloc(TAM);
-    char *d_a, *d_b;
     int m = strlen(a);
     int n = strlen(b);
     lcs(a, b, m, n);
@@ -88,7 +87,7 @@ int main(int argc, char *argv[])
 void lcs(char *a, char *b, int m, int n)
 {
     // Alfabeto de las dos cadenas
-    char *alfabeto = "";
+    char *alfabeto;
     alfabeto = alfabetoCadenas(alfabeto, a, m);
     alfabeto = alfabetoCadenas(alfabeto, b, n);
     int l = strlen(alfabeto);
@@ -102,7 +101,7 @@ void lcs(char *a, char *b, int m, int n)
     
     cudaError_t err = cudaSuccess;
 
-    char *d_a, *d_b, *d_alfabeto;
+    char *d_b, *d_alfabeto;
 
     err = cudaMalloc((void **)&d_mpre, sz_mpre);
     if (err != cudaSuccess){
