@@ -75,6 +75,8 @@ int main(int argc, char *argv[])
                 char *b = rand_string_alloc(i);
                 int m = strlen(a);
                 int n = strlen(b);
+
+                printf("B;%d;N;%d;I;%d;T;%f\n", block_count,thread_count, i, time_spent);
                 lcs_cuda(a, b, m, n, block_count, thread_count);
                 //free(a);
                 //free(b);
