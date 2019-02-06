@@ -9,6 +9,7 @@
 #define BLOCKS  512
 #define NUMTHREADS 8192
 #define TAM 4.5e3
+#define MAX_THREADS_BLOCK 1024
 
 void lcs_cuda(char *a, char *b, int m, int n, int block_count, int thread_count);
 char *alfabetoCadenas(char *alfab, char *a, int n);
@@ -76,10 +77,13 @@ int main(int argc, char *argv[])
                 int m = strlen(a);
                 int n = strlen(b);
 
-                //printf("B;%d;N;%d;I;%d\n", block_count,thread_count, i);
-                lcs_cuda(a, b, m, n, block_count, thread_count);
-                //free(a);
-                //free(b);
+                int threadsPerBlock = thread_count/block_count;
+                if(threadsPerBlock <= MAX_THREADS_BLOCK){
+                    //printf("B;%d;N;%d;I;%d\n", block_count,thread_count, i);
+                    lcs_cuda(a, b, m, n, block_count, thread_count);
+                }
+                free(a);
+                free(b);
                 double end = omp_get_wtime();
                 double time_spent = end - begin;
                 
@@ -192,18 +196,16 @@ void lcs_cuda(char *a, char *b, int m, int n, int block_count, int thread_count)
         exit(EXIT_FAILURE);
     }
 
+    int threadsPerBlock = thread_count/block_count;
+    int threads = block_count * threadsPerBlock;
+
     for (int i = 0; i <= m; i++)
     {
         int indiceAlfabeto = buscarIndice(alfabeto, *(a + i - 1));
-
-
-        int threadsPerBlock = thread_count/block_count;
-        int threads = block_count * threadsPerBlock;
-        //printf("B;%d;N;%d;\n", block_count,threadsPerBlock);
         matrizResultado<<< block_count,threadsPerBlock >>>(d_mpre, d_mres, indiceAlfabeto, i, n, threads);
         err = cudaGetLastError();
         if (err != cudaSuccess){
-            fprintf(stderr, "Failed to launch preprocesamiento kernel (error code %s)!\n", cudaGetErrorString(err));
+            fprintf(stderr, "Failed to launch matrizResultado kernel (error code %s)!\n", cudaGetErrorString(err));
             exit(EXIT_FAILURE);
         }        
     }
