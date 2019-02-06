@@ -21,7 +21,7 @@ int buscarIndice(char *cadena, char a);
 int main(void)
 {
     int thread_count = omp_get_max_threads();
-    for(int thread_count= 1 ; thread_count <=32 ; thread_count = thread_count * 2 ){
+    //for(int thread_count= 1 ; thread_count <=32 ; thread_count = thread_count * 2 ){
         for (int i = 2; i <= TAM_MAX;){
             double begin = omp_get_wtime();
             //char *a = "ABMDEBMA";
@@ -47,7 +47,7 @@ int main(void)
                     i = 5000;
             }
         }
-    }
+    //}
 /*
     // Comparación entre los dos algoritmos
         int i = 40000;
