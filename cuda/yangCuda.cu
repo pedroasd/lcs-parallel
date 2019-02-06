@@ -252,7 +252,7 @@ void lcs_cuda(char *a, char *b, int m, int n, int block_count, int thread_count)
     }
 
     // Imprime el resultado.
-    printf("Subsecuencia común más larga entre:\n C1: %s\n y C2: %s\n es %s\n", a, b, lcs);
+    //printf("Subsecuencia común más larga entre:\n C1: %s\n y C2: %s\n es %s\n", a, b, lcs);
 
     
     
