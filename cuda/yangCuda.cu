@@ -82,7 +82,7 @@ int main(int argc, char *argv[])
                     int m = strlen(a);
                     int n = strlen(b);
                     
-                    printf("B;%d;N;%d;I;%d\n", block_count,thread_count, i);
+                    //printf("B;%d;N;%d;I;%d\n", block_count,thread_count, i);
                     lcs_cuda(a, b, m, n, block_count, thread_count);
                     
                     free(a);
