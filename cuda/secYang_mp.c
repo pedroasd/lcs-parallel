@@ -22,7 +22,7 @@ int main(void)
 {
     int i = TAM_MAX;
     int thread_count = omp_get_max_threads();
-    for(int thread_count= 1 ; thread_count <=32 ; thread_count = thread_count * 2 ){
+    //for(int thread_count= 1 ; thread_count <=32 ; thread_count = thread_count * 2 ){
         //for (int i = 2; i <= TAM_MAX;){
             double begin = omp_get_wtime();
             //char *a = "ABMDEBMA";
@@ -31,8 +31,8 @@ int main(void)
             char *b = rand_string_alloc(i);
             int m = strlen(a);
             int n = strlen(b);
-            lcs_openmp(a, b, m, n, thread_count);
-            //lcs(a, b, m, n);
+            //lcs_openmp(a, b, m, n, thread_count);
+            lcs(a, b, m, n);
             free(a);
             free(b);
 
@@ -48,7 +48,7 @@ int main(void)
                     i = 5000;
             }
         }*/
-    }
+    //}
 /*
     // Comparación entre los dos algoritmos
         int i = 40000;
