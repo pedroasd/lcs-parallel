@@ -93,7 +93,7 @@ int main(int argc, char *argv[])
                     printf("B;%d;N;%d;I;%d;T;%f\n", block_count,thread_count, i, time_spent);
                 }
 
-                /*if (i > 2048)
+                if (i > 2048)
                     i += 5000;
                 else
                 {
@@ -101,7 +101,7 @@ int main(int argc, char *argv[])
                     if (i > 2048)
                         i = 5000;
                 }
-                */
+                
             }
         //}
     //}
