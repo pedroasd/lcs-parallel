@@ -64,7 +64,7 @@ __global__ void matrizResultado(int *mpre, int *mres, int indiceAlfabeto, long i
 int main(int argc, char *argv[])
 {   
     int i = TAM;
-    int block_count = BLOCKS;
+    //int block_count = BLOCKS;
     //int thread_count = NUMTHREADS;
     //int thread_count = TAM/2;
     for(int block_count = 2; block_count <= BLOCKS; block_count = block_count * 2){
