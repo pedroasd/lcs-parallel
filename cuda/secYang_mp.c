@@ -7,7 +7,7 @@
 #include <string.h>
 #include <omp.h>
 
-#define TAM_MAX 4.5e4
+#define TAM_MAX 1.5e4//4.5e4
 
 void lcs(char *a, char *b, int m, int n);
 void lcs_openmp(char *a, char *b, int m, int n, int thread_count);
@@ -20,9 +20,10 @@ int buscarIndice(char *cadena, char a);
 
 int main(void)
 {
+    int i = TAM_MAX;
     int thread_count = omp_get_max_threads();
     for(int thread_count= 1 ; thread_count <=32 ; thread_count = thread_count * 2 ){
-        for (int i = 2; i <= TAM_MAX;){
+        //for (int i = 2; i <= TAM_MAX;){
             double begin = omp_get_wtime();
             //char *a = "ABMDEBMA";
             //char *b = "ABACAEMC";
@@ -38,7 +39,7 @@ int main(void)
             double end = omp_get_wtime();
             double time_spent = end - begin;
             printf("N;%d;I;%d;T;%f\n", thread_count, i, time_spent);
-            if (i > 2048)
+        /*    if (i > 2048)
                 i += 5000;
             else
             {
@@ -46,7 +47,7 @@ int main(void)
                 if (i > 2048)
                     i = 5000;
             }
-        }
+        }*/
     }
 /*
     // Comparación entre los dos algoritmos
