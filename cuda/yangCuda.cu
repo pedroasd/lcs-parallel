@@ -8,7 +8,7 @@
 
 #define BLOCKS  512
 #define NUMTHREADS 8192
-#define TAM 4.5e4
+#define TAM 1.5e4
 #define MAX_THREADS_BLOCK 1024
 
 void lcs_cuda(char *a, char *b, int m, int n, int block_count, int thread_count);
@@ -63,13 +63,13 @@ __global__ void matrizResultado(int *mpre, int *mres, int indiceAlfabeto, long i
  */
 int main(int argc, char *argv[])
 {   
-    int i = TAM;
-    //int block_count = BLOCKS;
-    //int thread_count = NUMTHREADS;
+    //int i = TAM;
+    int block_count = BLOCKS;
+    int thread_count = NUMTHREADS;
     //int thread_count = TAM/2;
-    for(int block_count = 2; block_count <= BLOCKS; block_count = block_count * 2){
-        for(int thread_count= block_count; thread_count <= NUMTHREADS; thread_count = thread_count * 2 ){
-            //for (int i = 2; i <= TAM;){
+    //for(int block_count = 2; block_count <= BLOCKS; block_count = block_count * 2){
+        //for(int thread_count= block_count; thread_count <= NUMTHREADS; thread_count = thread_count * 2 ){
+            for (int i = TAM; i <= TAM*10;){
 
                 int threadsPerBlock = thread_count/block_count;
                 if(threadsPerBlock <= MAX_THREADS_BLOCK){
@@ -102,9 +102,9 @@ int main(int argc, char *argv[])
                         i = 5000;
                 }
                 */
-            //}
-        }
-    }
+            }
+        //}
+    //}
     return 0;
 }
 
