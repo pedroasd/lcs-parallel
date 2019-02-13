@@ -25,10 +25,10 @@ int main(void)
     //for(int thread_count= 1 ; thread_count <=32 ; thread_count = thread_count * 2 ){
         //for (int i = 2; i <= TAM_MAX;){
             double begin = omp_get_wtime();
-            char *a = "ABMDEBMA";
-            char *b = "ABACAEMC";
-            //char *a = rand_string_alloc(i);
-            //char *b = rand_string_alloc(i);
+            //char *a = "ABMDEBMA";
+            //char *b = "ABACAEMC";
+            char *a = rand_string_alloc(i);
+            char *b = rand_string_alloc(i);
             int m = strlen(a);
             int n = strlen(b);
             //lcs_openmp(a, b, m, n, thread_count);
