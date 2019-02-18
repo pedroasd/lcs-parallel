@@ -81,7 +81,7 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
     alfabeto = alfabetoCadenas(alfabeto, b, n);
     int l = strlen(alfabeto);
 
-    //printf("Alfabeto: %s\n", alfabeto);
+    printf("Alfabeto: %s\n", alfabeto);
 
     // Tabla de preprocesamiento
     int *mpre;
