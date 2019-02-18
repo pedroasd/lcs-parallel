@@ -4,9 +4,7 @@ __kernel void matrizResultado(__global int *mpre, __global int *mres, const int 
 {
     int index = get_global_id(0);
     
-    printf("%d\n", index)
-
-    /*int inicial = (n/threads) * index;
+    int inicial = (n/threads) * index;
     int final = inicial + (n/threads) - 1;
     
     if(final > n || final < 0){ final = n;}
@@ -19,6 +17,5 @@ __kernel void matrizResultado(__global int *mpre, __global int *mres, const int 
             *(mres + i * (n + 1) + j) = max(*(mres + (i - 1) * (n + 1) + j), 0);
         else
             *(mres + i * (n + 1) + j) = max(*(mres + (i - 1) * (n + 1) + j), *(mres + (i - 1) * (n + 1) + *(mpre + indiceAlfabeto * (n + 1) + j) - 1) + 1);
-    }
-    */
+    }    
 }
