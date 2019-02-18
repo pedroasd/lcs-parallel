@@ -322,7 +322,7 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
 char *adicionarChar(char *str, char caracter)
 {
     size_t len = strlen(str);
-    char *str2 = new char[len + 2];
+    char *str2 = malloc(len + 2);
     strcpy(str2, str);
     str2[len] = caracter;
     str2[len + 1] = '\0';
@@ -365,7 +365,7 @@ int buscarIndice(char *cadena, char a)
 /** Genera una cadena de caracteres aleatoria de tamaño size y genera el esapcio en memoria. */
 char *rand_string_alloc(size_t size)
 {
-    char *s = new char[size + 1];
+    char *s = malloc(size + 1);
     if (s)
     {
         rand_string(s, size);
