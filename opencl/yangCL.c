@@ -174,11 +174,11 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
     checkError(ret, "Creating kernel");
 
     /* Set OpenCL Kernel Parameters */
-    ret = clSetKernelArg(kernel, 0, sizeof(int), (void *)&d_mpre);
+    ret = clSetKernelArg(kernel, 0, sizeof (cl_mem), (void *)&d_mpre);
     checkError(ret, "Setting kernel arguments");
-    ret = clSetKernelArg(kernel, 1, sizeof(char), (void *)&d_b);
+    ret = clSetKernelArg(kernel, 1, sizeof (cl_mem), (void *)&d_b);
     checkError(ret, "Setting kernel arguments");
-    ret = clSetKernelArg(kernel, 2, sizeof(char), (void *)&d_alfabeto);
+    ret = clSetKernelArg(kernel, 2, sizeof (cl_mem), (void *)&d_alfabeto);
     checkError(ret, "Setting kernel arguments");
     ret = clSetKernelArg(kernel, 3, sizeof(long), &n);
     checkError(ret, "Setting kernel arguments");
