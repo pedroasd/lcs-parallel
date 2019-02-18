@@ -3,6 +3,7 @@
 #include <err_code.h>
 #include <CL/cl.h>
 #include <sys/types.h>
+#include <string.h>
 #include <omp.h>
 
 #define MAX_SOURCE_SIZE (0x100000)
@@ -86,8 +87,6 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
     int sz_mpre = l * (n + 1) * sizeof(int);
     mpre = (int *)malloc(sz_mpre);
     
-    cudaError_t err = cudaSuccess;
-
     cl_device_id device_id = NULL;
     cl_context context = NULL;
     cl_command_queue command_queue = NULL;
@@ -174,7 +173,6 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
     checkError(ret, "Creating kernel");
 
     /* Set OpenCL Kernel Parameters */
-    iterations = ITERATIONS;
     ret = clSetKernelArg(kernel, 0, sizeof(int), (void *)&d_mpre);
     checkError(ret, "Setting kernel arguments");
     ret = clSetKernelArg(kernel, 1, sizeof(char), (void *)&d_b);
