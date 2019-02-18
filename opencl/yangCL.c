@@ -219,10 +219,10 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
 
     /******************************************************************************/
     /* open kernel */
-    fileName = "./yang_resul.cl";
+    char fileName2[] = "./yang_resul.cl";
     
     /* Load the source code containing the kernel*/
-    fp = fopen(fileName, "r");
+    fp = fopen(fileName2, "r");
     if (!fp) {
     fprintf(stderr, "Failed to load kernel.\n");
     exit(1);
