@@ -180,12 +180,11 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
     checkError(ret, "Setting kernel arguments");
     ret = clSetKernelArg(kernel, 2, sizeof (cl_mem), (void *)&d_alfabeto);
     checkError(ret, "Setting kernel arguments");
-    /*ret = clSetKernelArg(kernel, 3, sizeof(long), &n);
+    ret = clSetKernelArg(kernel, 3, sizeof(long), &n);
     checkError(ret, "Setting kernel arguments");
     ret = clSetKernelArg(kernel, 4, sizeof(int), &l);
     checkError(ret, "Setting kernel arguments");
-    */
-
+    
     //clEnqueueWriteBuffer(command_queue, pi, CL_TRUE, 0, 1, &h_pi, 0, NULL, NULL);
     size_t global_work_size = l;
     size_t local_work_size = 1;
