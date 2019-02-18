@@ -146,8 +146,8 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
     checkError(ret, "Creating buffer d_alfabeto");
 
     /* copy array b and alfabeto to d_b and d_alfabeto */
-    //clEnqueueWriteBuffer (command_queue, d_b, CL_FALSE, 0, sizeof(char)*strlen(b), b, 0, NULL, NULL);
-    //clEnqueueWriteBuffer (command_queue, d_alfabeto, CL_FALSE, 0, sizeof(char)*strlen(alfabeto), alfabeto, 0, NULL, NULL);
+    clEnqueueWriteBuffer (command_queue, d_b, CL_FALSE, 0, sizeof(char)*strlen(b), b, 0, NULL, NULL);
+    clEnqueueWriteBuffer (command_queue, d_alfabeto, CL_FALSE, 0, sizeof(char)*strlen(alfabeto), alfabeto, 0, NULL, NULL);
 
     /******************************************************************************/
     /* create build program */
