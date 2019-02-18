@@ -94,6 +94,7 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
     cl_mem d_mpre = NULL;
     cl_mem d_b = NULL;
     cl_mem d_alfabeto = NULL;
+    cl_mem d_mres = NULL;    
     cl_program program = NULL;
     cl_kernel kernel = NULL;
     cl_platform_id platform_id = NULL;
@@ -209,19 +210,59 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
     ret = clReleaseProgram(program);
     ret = clReleaseMemObject(d_b);
     ret = clReleaseMemObject(d_alfabeto);
-
+    free(source_str);
     
     // Matriz de resultado
-    int *mres, *d_mres;
+    int *mres;
     int sz_mres = (m + 1) * (n + 1) * sizeof(int);
     mres = (int *)malloc(sz_mres);
 
-    /*err = cudaMalloc((void **)&d_mres, sz_mres);
-    if (err != cudaSuccess){
-        fprintf(stderr, "Failed to allocate device vector d_mres (error code %s)!\n", cudaGetErrorString(err));
-        exit(EXIT_FAILURE);
+    /******************************************************************************/
+    /* open kernel */
+    FILE *fp;
+    char fileName[] = "./yang_resul.cl";
+    char *source_str;
+    size_t source_size;
+
+    /* Load the source code containing the kernel*/
+    fp = fopen(fileName, "r");
+    if (!fp) {
+    fprintf(stderr, "Failed to load kernel.\n");
+    exit(1);
     }
-    */
+    source_str = (char*)malloc(MAX_SOURCE_SIZE);
+    source_size = fread(source_str, 1, MAX_SOURCE_SIZE, fp);
+    fclose(fp);  
+
+
+    /* Create Memory Buffer */
+    d_mres = clCreateBuffer(context, CL_MEM_READ_WRITE, sz_mres, NULL, &ret);
+    checkError(ret, "Creating buffer d_mres");
+
+    
+    /******************************************************************************/
+    /* create build program */
+
+    /* Create Kernel Program from the source */
+    program = clCreateProgramWithSource(context, 1, (const char **)&source_str,
+    (const size_t *)&source_size, &ret);
+    checkError(ret, "Creating program");
+
+    /* Build Kernel Program */
+    ret = clBuildProgram(program, 1, &device_id, NULL, NULL, NULL);
+    if (ret != CL_SUCCESS)
+    {
+        size_t len;
+        char buffer[2048];
+
+        printf("Error: Failed to build program executable!\n%s\n", err_code(ret));
+        clGetProgramBuildInfo(program, device_id, CL_PROGRAM_BUILD_LOG, sizeof(buffer), buffer, &len);
+        printf("%s\n", buffer);
+        return EXIT_FAILURE;
+    }
+    /* Create OpenCL Kernel */
+    kernel = clCreateKernel(program, "matrizResultado", &ret);
+    checkError(ret, "Creating kernel");
 
     int threadsPerBlock = thread_count/block_count;
     //int threadsPerBlock = (n/2)/block_count;
@@ -231,46 +272,50 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
     for (int i = 0; i <= m; i++)
     {
         int indiceAlfabeto = buscarIndice(alfabeto, *(a + i - 1));
-        /*matrizResultado<<< block_count,threadsPerBlock >>>(d_mpre, d_mres, indiceAlfabeto, i, n, threads);
-        err = cudaGetLastError();
-        if (err != cudaSuccess){
-            fprintf(stderr, "Failed to launch matrizResultado kernel (error code %s)!\n", cudaGetErrorString(err));
-            exit(EXIT_FAILURE);
-        } 
-        */
 
-
-
-       for (int j = 0; j <= n; j++)
-        {
-            if (i == 0 || j == 0)
-                *(mres + i * (n + 1) + j) = 0;
-            else if (*(mpre + indiceAlfabeto * (n + 1) + j) == 0)
-                *(mres + i * (n + 1) + j) = max(*(mres + (i - 1) * (n + 1) + j), 0);
-            else
-                *(mres + i * (n + 1) + j) = max(*(mres + (i - 1) * (n + 1) + j), *(mres + (i - 1) * (n + 1) + *(mpre + indiceAlfabeto * (n + 1) + j) - 1) + 1);
-        }
+        /* Set OpenCL Kernel Parameters */
+        ret = clSetKernelArg(kernel, 0, sizeof (cl_mem), (void *)&d_mpre);
+        checkError(ret, "Setting kernel arguments");
+        ret = clSetKernelArg(kernel, 1, sizeof (cl_mem), (void *)&d_mres);
+        checkError(ret, "Setting kernel arguments");
+        ret = clSetKernelArg(kernel, 2, sizeof(int), &indiceAlfabeto);
+        checkError(ret, "Setting kernel arguments");
+        ret = clSetKernelArg(kernel, 3, sizeof(int), &i);
+        checkError(ret, "Setting kernel arguments");
+        ret = clSetKernelArg(kernel, 4, sizeof(int), &n);
+        checkError(ret, "Setting kernel arguments");
+        ret = clSetKernelArg(kernel, 5, sizeof(int), &threads);
+        checkError(ret, "Setting kernel arguments");
+        
+        //clEnqueueWriteBuffer(command_queue, pi, CL_TRUE, 0, 1, &h_pi, 0, NULL, NULL);
+        size_t global_work_size = l;
+        size_t local_work_size = 1;
+        cl_uint work_dim = 1;
+        /* Execute OpenCL Kernel */
+        //ret = clEnqueueTask(command_queue, kernel, 0, NULL,NULL);  //single work item
+        ret = clEnqueueNDRangeKernel(command_queue, kernel, work_dim,
+            0, &global_work_size, &local_work_size, 0, NULL, NULL);
+        checkError(ret, "Enqueueing kernel");
+        ret = clFinish(command_queue);
+        checkError(ret, "Waiting for commands to finish");
 
     }
 
-    /*err = cudaMemcpy(mres, d_mres, sz_mres, cudaMemcpyDeviceToHost);
-    if (err != cudaSuccess){
-        fprintf(stderr, "Failed to copy vector d_mres->mres from device to host (error code %s)!\n", cudaGetErrorString(err));
-        exit(EXIT_FAILURE);
-    }
+    /******************************************************************************/
+    /* Copy results from the memory buffer */
+    ret = clEnqueueReadBuffer(command_queue, d_mres, CL_TRUE, 0, sz_mres, mres, 0, NULL, NULL);
+    checkError(ret, "Creating program");
 
-    err = cudaFree(d_mpre);
-    if (err != cudaSuccess){
-        fprintf(stderr, "Failed to free device vector d_mpre (error code %s)!\n", cudaGetErrorString(err));
-        exit(EXIT_FAILURE);
-    }
+    ret = clFlush(command_queue);
+    ret = clFinish(command_queue);
+    ret = clReleaseKernel(kernel);
+    ret = clReleaseProgram(program);
+    ret = clReleaseMemObject(d_mpre);
+    ret = clReleaseMemObject(d_mres);
+    ret = clReleaseCommandQueue(command_queue);
+    ret = clReleaseContext(context);
 
-    err = cudaFree(d_mres);
-    if (err != cudaSuccess){
-        fprintf(stderr, "Failed to free device vector d_mres (error code %s)!\n", cudaGetErrorString(err));
-        exit(EXIT_FAILURE);
-    }
-    */
+    free(source_str);
 
     //printf("Programación dinámica\n"); 
 

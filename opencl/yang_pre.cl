@@ -6,7 +6,6 @@ __kernel void preprocesamiento(__global int *mpre, __global char *b, __global ch
 
     for (int j = 0; j <= n; j++)
     {
-        printf("%d: %c\ %c\n", i, alfabeto, b);
         //printf("%d,%d\n",i,j);
         if (j == 0)
             *(mpre + (i - 1) * (n + 1) + j) = 0;

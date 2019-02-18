@@ -1,8 +1,8 @@
 #pragma OPENCL EXTENSION cl_khr_fp64 : enable
 
-__global__ void matrizResultado(int *mpre, int *mres, int indiceAlfabeto, long int i, long int n, int threads)
+__kernel void matrizResultado(__global int *mpre, __global int *mres, const int indiceAlfabeto, const int i, const int n, const int threads)
 {
-    int index = (blockDim.x * blockIdx.x) + threadIdx.x;
+    int index = get_global_id(0);
     
     printf("%d\n", index)
 
