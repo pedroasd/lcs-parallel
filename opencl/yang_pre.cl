@@ -4,7 +4,7 @@ __kernel void preprocesamiento(__global int *mpre/*, __global char *b, __global 
 {
     int i = get_global_id(0);
 
-    printf("%d\n", i)
+    printf("%d\n", i);
 
     /*for (int j = 0; j <= n; j++)
     {
