@@ -14,7 +14,7 @@
 #define TAM 1.5e4
 #define MAX_THREADS_BLOCK 1024
 
-void lcs_cuda(char *a, char *b, int m, int n, int block_count, int thread_count);
+void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_count);
 char *alfabetoCadenas(char *alfab, char *a, int n);
 char *adicionarChar(char *str, char caracter);
 int buscarIndice(char *cadena, char a);
