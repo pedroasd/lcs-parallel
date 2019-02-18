@@ -1,10 +1,10 @@
 #pragma OPENCL EXTENSION cl_khr_fp64 : enable
 
-__kernel void preprocesamiento(__global int *mpre/*, __global char *b, __global char *alfabeto, const long int n, const int l*/)
+__kernel void preprocesamiento(__global int *mpre, __global char *b/*, __global char *alfabeto, const long int n, const int l*/)
 {
     int i = get_global_id(0);
 
-    printf("%d\n", i);
+    printf("%c\n", &alfabeto[i]);
 
     /*for (int j = 0; j <= n; j++)
     {

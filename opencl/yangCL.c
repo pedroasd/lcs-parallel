@@ -139,12 +139,12 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
     d_mpre = clCreateBuffer(context, CL_MEM_READ_WRITE, sz_mpre, NULL, &ret);
     checkError(ret, "Creating buffer d_mpre");
 
-    /*d_b = clCreateBuffer(context, CL_MEM_READ_WRITE, sizeof(char)*strlen(b), NULL, &ret);
+    d_b = clCreateBuffer(context, CL_MEM_READ_WRITE, sizeof(char)*strlen(b), NULL, &ret);
     checkError(ret, "Creating buffer d_b");
 
     d_alfabeto = clCreateBuffer(context, CL_MEM_READ_WRITE, sizeof(char)*strlen(alfabeto), NULL, &ret);
     checkError(ret, "Creating buffer d_alfabeto");
-*/
+
     /* copy array b and alfabeto to d_b and d_alfabeto */
     //clEnqueueWriteBuffer (command_queue, d_b, CL_FALSE, 0, sizeof(char)*strlen(b), b, 0, NULL, NULL);
     //clEnqueueWriteBuffer (command_queue, d_alfabeto, CL_FALSE, 0, sizeof(char)*strlen(alfabeto), alfabeto, 0, NULL, NULL);
@@ -176,11 +176,11 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
     /* Set OpenCL Kernel Parameters */
     ret = clSetKernelArg(kernel, 0, sizeof (cl_mem), (void *)&d_mpre);
     checkError(ret, "Setting kernel arguments");
-    /*ret = clSetKernelArg(kernel, 1, sizeof (cl_mem), (void *)&d_b);
+    ret = clSetKernelArg(kernel, 1, sizeof (cl_mem), (void *)&d_b);
     checkError(ret, "Setting kernel arguments");
     ret = clSetKernelArg(kernel, 2, sizeof (cl_mem), (void *)&d_alfabeto);
     checkError(ret, "Setting kernel arguments");
-    ret = clSetKernelArg(kernel, 3, sizeof(long), &n);
+    /*ret = clSetKernelArg(kernel, 3, sizeof(long), &n);
     checkError(ret, "Setting kernel arguments");
     ret = clSetKernelArg(kernel, 4, sizeof(int), &l);
     checkError(ret, "Setting kernel arguments");
