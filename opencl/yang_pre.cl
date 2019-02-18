@@ -2,7 +2,7 @@
 
 __kernel void preprocesamiento(__global int *mpre, __global char *b, __global char *alfabeto, const long int n, const int l)
 {
-    int i = (blockDim.x * blockIdx.x) + threadIdx.x + 1;
+    int i = get_global_id(0);
     for (int j = 0; j <= n; j++)
     {
         //printf("%d,%d\n",i,j);
