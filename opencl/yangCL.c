@@ -15,6 +15,7 @@
 #define MAX_THREADS_BLOCK 1024
 
 void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_count);
+int max(int a, int b);
 char *alfabetoCadenas(char *alfab, char *a, int n);
 char *adicionarChar(char *str, char caracter);
 int buscarIndice(char *cadena, char a);
@@ -317,6 +318,12 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
         exit(EXIT_FAILURE);
     } 
     */  
+}
+
+/** Función para obtener el máximo entre dos números.*/
+int max(int a, int b)
+{
+    return (a > b) ? a : b;
 }
 
 char *adicionarChar(char *str, char caracter)
