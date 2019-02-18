@@ -4,7 +4,9 @@ __global__ void matrizResultado(int *mpre, int *mres, int indiceAlfabeto, long i
 {
     int index = (blockDim.x * blockIdx.x) + threadIdx.x;
     
-    int inicial = (n/threads) * index;
+    printf("%d\n", index)
+
+    /*int inicial = (n/threads) * index;
     int final = inicial + (n/threads) - 1;
     
     if(final > n || final < 0){ final = n;}
@@ -18,4 +20,5 @@ __global__ void matrizResultado(int *mpre, int *mres, int indiceAlfabeto, long i
         else
             *(mres + i * (n + 1) + j) = max(*(mres + (i - 1) * (n + 1) + j), *(mres + (i - 1) * (n + 1) + *(mpre + indiceAlfabeto * (n + 1) + j) - 1) + 1);
     }
+    */
 }
