@@ -355,7 +355,7 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
     printf("Tamaño: %ld\n", strlen(lcs));
     //free(mres);
     printf("Free mres");
-    free(mpre);
+    //free(mpre);
     printf("Free mpre");
     
     /*err = cudaDeviceReset();
