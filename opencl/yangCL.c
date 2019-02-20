@@ -305,7 +305,7 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
         //clEnqueueWriteBuffer(command_queue, pi, CL_TRUE, 0, 1, &h_pi, 0, NULL, NULL);
         global_work_size = thread_count;
         local_work_size = threadsPerBlock;
-        cl_uint work_dim = 1;
+        work_dim = 1;
         /* Execute OpenCL Kernel */
         //ret = clEnqueueTask(command_queue, kernel, 0, NULL,NULL);  //single work item
         ret = clEnqueueNDRangeKernel(command_queue, kernel, work_dim,
@@ -357,7 +357,9 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
 
     // Comienza desde la esquina inferior derecha y
     // almacena el resultado en lcs[]
-    int i = m, j = n;
+    //int i = m, j = n;
+    i=m;
+    int j = n;
     while (i > 0 && j > 0)
     {
         // Si a[] y b[] son iguales, hace parte de LCS

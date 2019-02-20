@@ -3,7 +3,7 @@
 __kernel void matrizResultado(__global int *mpre, __global int *mres, const int indiceAlfabeto, const int i, const int n, const int threads)
 {
     int index = get_global_id(0);
-    printf("%d:"index);
+    printf("%d:",index);
     
     int inicial = (n/threads) * index;
     int final = inicial + (n/threads) - 1;
