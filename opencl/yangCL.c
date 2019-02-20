@@ -24,7 +24,7 @@ void rand_string(char *str, size_t size);
 
 int main(int argc, char *argv[])
 {   
-    int i = 10;//TAM;
+    int i = 100;//TAM;
     int block_count = BLOCKS;
     int thread_count = NUMTHREADS;
     //int thread_count = TAM/2;
@@ -47,9 +47,9 @@ int main(int argc, char *argv[])
                     lcs_opencl(a, b, m, n, block_count, thread_count);
                     
                     free(a);
-                    printf("Free a");
+                    printf("Free a\n");
                     free(b);
-                    printf("Free b");
+                    printf("Free b\n");
                     double end = omp_get_wtime();
                     double time_spent = end - begin;
                     
@@ -333,7 +333,7 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
     // IMPRESIÓN DE LA CADENA
     // Longitud máxima de LCS
     int index = *(mres + m * (n + 1) + n);
-    printf("index: %d", index);
+    printf("index: %d\n", index);
 
     // Cadena donde se almacena una cadena LCS.
     char lcs[index + 1];
@@ -367,9 +367,9 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
     
     printf("Tamaño: %ld\n", strlen(lcs));
     free(mres);
-    printf("Free mres");
+    printf("Free mres\n");
     free(mpre);
-    printf("Free mpre");
+    printf("Free mpre\n");
     
     /*err = cudaDeviceReset();
     if (err != cudaSuccess){
