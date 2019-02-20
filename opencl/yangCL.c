@@ -319,7 +319,7 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
     //printf("Programación dinámica\n"); 
 
     // Impresión de tabla resultado de programación dinámica.
-    /*int k = 0;
+    int k = 0;
     for (int i = 0; i <= m; i++)
     {
         for (int j = 0; j <= n; j++)
@@ -328,7 +328,7 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
             k++;
         }
         printf("\n");
-    }*/
+    }
 
     // IMPRESIÓN DE LA CADENA
     // Longitud máxima de LCS
