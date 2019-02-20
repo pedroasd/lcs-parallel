@@ -25,7 +25,7 @@ void rand_string(char *str, size_t size);
 int main(int argc, char *argv[])
 {   
     int i = 1.5e3;//TAM;
-    int block_count = BLOCKS;
+    int block_count = 20;//BLOCKS;
     int thread_count = 100;//NUMTHREADS;
     //int thread_count = TAM/2;
     //for(int block_count = 2; block_count <= BLOCKS; block_count=block_count+50){
