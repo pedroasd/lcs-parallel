@@ -7,7 +7,7 @@ __kernel void matrizResultado(__global int *mpre, __global int *mres, const int 
     
     int inicial = (n/threads) * index;
     int final = inicial + (n/threads) - 1;
-    printf("i: %d inicial: %d final: %d\n", i, inicial,final);
+    if(i > 0) printf("i: %d inicial: %d final: %d\n", i, inicial,final);
     
     if(final > n || final < 0){ final = n;}
 
