@@ -205,8 +205,6 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
     ret = clEnqueueReadBuffer(command_queue, d_mpre, CL_TRUE, 0, sz_mpre, mpre, 0, NULL, NULL);
     checkError(ret, "Creating program");
     
-    //printf("Preprocesamiento finalizado\n");
-
     ret = clFlush(command_queue);
     ret = clReleaseKernel(kernel);
     ret = clReleaseProgram(program);
@@ -214,6 +212,22 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
     ret = clReleaseMemObject(d_alfabeto);
     //free(source_str);
     
+    //printf("Preprocesamiento finalizado\n");
+
+    // Impresión de tabla preprocesamiento.
+    int g = 0;
+    for (int i = 0; i < l; i++)
+    {
+        for (int j = 0; j <= n; j++)
+        {
+            printf("%d\t", *(mpre + g));
+            g++;
+        }
+        printf("\n");
+    }
+    printf("\n");   
+
+
     // Matriz de resultado
     int *mres;
     int sz_mres = (m + 1) * (n + 1) * sizeof(int);
@@ -266,7 +280,7 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
     int threadsPerBlock = thread_count/block_count;
     //int threadsPerBlock = (n/2)/block_count;
     int threads = block_count * threadsPerBlock;
-    //printf("B;%d;N;%d;TB;%d\n", block_count,thread_count, threadsPerBlock);
+    printf("B;%d;N;%d;TB;%d\n", block_count,thread_count, threadsPerBlock);
 
     for (int i = 0; i <= m; i++)
     {
