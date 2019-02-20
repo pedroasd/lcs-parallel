@@ -282,10 +282,8 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
     int threads = block_count * threadsPerBlock;
     printf("B;%d;N;%d;TB;%d\n", block_count,thread_count, threadsPerBlock);
 
-    //for (int i = 0; i <= m; i++)
-    //{
-        int i=0;
-
+    for (int i = 0; i <= m; i++)
+    {
         int indiceAlfabeto = buscarIndice(alfabeto, *(a + i - 1));
 
         /* Set OpenCL Kernel Parameters */
@@ -314,7 +312,7 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
         ret = clFinish(command_queue);
         checkError(ret, "Waiting for commands to finish");
 
-    //}
+    }
 
     /******************************************************************************/
     /* Copy results from the memory buffer */
@@ -335,7 +333,7 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
     //printf("Programación dinámica\n"); 
 
     // Impresión de tabla resultado de programación dinámica.
-    /*int k = 0;
+    int k = 0;
     for (int i = 0; i <= m; i++)
     {
         for (int j = 0; j <= n; j++)
@@ -344,7 +342,7 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
             k++;
         }
         printf("\n");
-    }*/
+    }
 
     // IMPRESIÓN DE LA CADENA
     // Longitud máxima de LCS
@@ -357,9 +355,7 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
 
     // Comienza desde la esquina inferior derecha y
     // almacena el resultado en lcs[]
-    //int i = m, j = n;
-    i=m;
-    int j = n;
+    int i = m, j = n;
     while (i > 0 && j > 0)
     {
         // Si a[] y b[] son iguales, hace parte de LCS
