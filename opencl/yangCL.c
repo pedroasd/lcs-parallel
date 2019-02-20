@@ -282,8 +282,10 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
     int threads = block_count * threadsPerBlock;
     printf("B;%d;N;%d;TB;%d\n", block_count,thread_count, threadsPerBlock);
 
-    for (int i = 0; i <= m; i++)
-    {
+    //for (int i = 0; i <= m; i++)
+    //{
+        int i=0;
+
         int indiceAlfabeto = buscarIndice(alfabeto, *(a + i - 1));
 
         /* Set OpenCL Kernel Parameters */
@@ -312,7 +314,7 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
         ret = clFinish(command_queue);
         checkError(ret, "Waiting for commands to finish");
 
-    }
+    //}
 
     /******************************************************************************/
     /* Copy results from the memory buffer */
