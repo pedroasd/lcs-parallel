@@ -24,7 +24,7 @@ void rand_string(char *str, size_t size);
 
 int main(int argc, char *argv[])
 {   
-    int i = TAM;
+    int i = 10;//TAM;
     int block_count = BLOCKS;
     int thread_count = NUMTHREADS;
     //int thread_count = TAM/2;
@@ -318,9 +318,22 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
 
     //printf("Programación dinámica\n"); 
 
+    // Impresión de tabla resultado de programación dinámica.
+    int k = 0;
+    for (int i = 0; i <= m; i++)
+    {
+        for (int j = 0; j <= n; j++)
+        {
+            printf("%d\t", *(mres + k));
+            k++;
+        }
+        printf("\n");
+    }
+
     // IMPRESIÓN DE LA CADENA
     // Longitud máxima de LCS
     int index = *(mres + m * (n + 1) + n);
+    printf("index: %d", index)
 
     // Cadena donde se almacena una cadena LCS.
     char lcs[index + 1];
