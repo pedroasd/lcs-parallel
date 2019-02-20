@@ -215,7 +215,7 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
     //printf("Preprocesamiento finalizado\n");
 
     // Impresión de tabla preprocesamiento.
-    int g = 0;
+    /*int g = 0;
     for (int i = 0; i < l; i++)
     {
         for (int j = 0; j <= n; j++)
@@ -226,7 +226,7 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
         printf("\n");
     }
     printf("\n");   
-
+    */
 
     // Matriz de resultado
     int *mres;
@@ -301,8 +301,8 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
         checkError(ret, "Setting kernel arguments");
         
         //clEnqueueWriteBuffer(command_queue, pi, CL_TRUE, 0, 1, &h_pi, 0, NULL, NULL);
-        size_t global_work_size = l;
-        size_t local_work_size = 1;
+        size_t global_work_size = threads;
+        size_t local_work_size = threadsPerBlock;
         cl_uint work_dim = 1;
         /* Execute OpenCL Kernel */
         //ret = clEnqueueTask(command_queue, kernel, 0, NULL,NULL);  //single work item
