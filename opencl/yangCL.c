@@ -47,7 +47,9 @@ int main(int argc, char *argv[])
                     lcs_opencl(a, b, m, n, block_count, thread_count);
                     
                     free(a);
+                    printf("Free a");
                     free(b);
+                    printf("Free b");
                     double end = omp_get_wtime();
                     double time_spent = end - begin;
                     
@@ -352,7 +354,9 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
     
     printf("Tamaño: %ld\n", strlen(lcs));
     free(mres);
+    printf("Free mres");
     free(mpre);
+    printf("Free mpre");
     
     /*err = cudaDeviceReset();
     if (err != cudaSuccess){
