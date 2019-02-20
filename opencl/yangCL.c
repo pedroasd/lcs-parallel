@@ -333,7 +333,7 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
     // IMPRESIÓN DE LA CADENA
     // Longitud máxima de LCS
     int index = *(mres + m * (n + 1) + n);
-    printf("index: %d", index)
+    printf("index: %d", index);
 
     // Cadena donde se almacena una cadena LCS.
     char lcs[index + 1];
