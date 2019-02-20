@@ -312,6 +312,7 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
         ret = clFinish(command_queue);
         checkError(ret, "Waiting for commands to finish");
 
+        if(i > 0) break;
     }
 
     /******************************************************************************/
