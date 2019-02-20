@@ -38,8 +38,8 @@ int main(int argc, char *argv[])
                     double begin = omp_get_wtime();
                     //char *a = "ABMDEBMA";
                     //char *b = "ABACAEMC";
-                    //char *a = rand_string_alloc(i);
-                    //char *b = rand_string_alloc(i);
+                    char *a = rand_string_alloc(i);
+                    char *b = rand_string_alloc(i);
                     int m = strlen(a);
                     int n = strlen(b);
                     
