@@ -350,7 +350,7 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
 
     
     
-    //printf("Tamaño: %ld\n", strlen(lcs));
+    printf("Tamaño: %ld\n", strlen(lcs));
     free(mres);
     free(mpre);
     
