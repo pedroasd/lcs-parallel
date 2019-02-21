@@ -332,7 +332,7 @@ char *rand_string_alloc(size_t size)
     char *s = new char[size + 1];
     if (s)
     {
-        rand_string(s, size);
+        rand_string(s, size + 1);
     }
     return s;
 }
