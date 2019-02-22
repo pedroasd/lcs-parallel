@@ -345,15 +345,15 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
     int k = 0;
     for (int i = 0; i <= m; i++)
     {
-        if(i == 1){
+        //if(i == 1){
         for (int j = 0; j <= n; j++)
         {
             printf("%d", *(mres + k));
             k++;
         }
         printf("\n");
-        break;
-        }
+        //break;
+        //}
     }
 
     // IMPRESIÓN DE LA CADENA
