@@ -19,6 +19,6 @@ __kernel void matrizResultado(__global int *mpre, __global int *mres, const int 
             *(mres + i * (n + 1) + j) = max(*(mres + (i - 1) * (n + 1) + j), 0);
         else
             *(mres + i * (n + 1) + j) = max(*(mres + (i - 1) * (n + 1) + j), *(mres + (i - 1) * (n + 1) + *(mpre + indiceAlfabeto * (n + 1) + j) - 1) + 1);
-        //if(i == 1) printf("%d",*(mres + i * (n + 1) + j));
+        if(i == 1) printf("%d",*(mres + i * (n + 1) + j));
     }    
 }
