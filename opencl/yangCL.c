@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
     int thread_count = NUMTHREADS;
     //int thread_count = TAM/2;
     for(int block_count = 2; block_count <= BLOCKS; block_count=block_count+50){
-        for(int thread_count= block_count; thread_count <= NUMTHREADS; thread_count=thread_count+50 ){
+        for(int thread_count= 100; thread_count <= NUMTHREADS; thread_count=thread_count+50 ){
             //for (int i = 2; i <= TAM;){
 
                 int threadsPerBlock = thread_count/block_count;
@@ -81,7 +81,7 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
     alfabeto = alfabetoCadenas(alfabeto, b, n);
     int l = strlen(alfabeto);
 
-    printf("Alfabeto: %s\n", alfabeto);
+    //printf("Alfabeto: %s\n", alfabeto);
 
     // Tabla de preprocesamiento
     int *mpre;
@@ -346,7 +346,7 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
     }
 
     // Imprime el resultado.
-    printf("Subsecuencia común más larga entre:\n C1: %s\n y C2: %s\n es %s\n", a, b, lcs);
+    //printf("Subsecuencia común más larga entre:\n C1: %s\n y C2: %s\n es %s\n", a, b, lcs);
 
     
     
