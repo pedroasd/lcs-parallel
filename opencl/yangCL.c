@@ -335,6 +335,8 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
 
     free(source_str);
 
+    printf("\n"); 
+
     //printf("Programación dinámica\n"); 
 
     // Impresión de tabla resultado de programación dinámica.
@@ -344,7 +346,7 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
         if(i == 1){
         for (int j = 0; j <= n; j++)
         {
-            printf("%d\t", *(mres + k));
+            printf("%d", *(mres + k));
             k++;
         }
         printf("\n");
