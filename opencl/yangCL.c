@@ -296,9 +296,11 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
         int indiceAlfabeto = buscarIndice(alfabeto, *(a + i - 1));
 
         /* Set OpenCL Kernel Parameters */
-        ret = clSetKernelArg(kernel, 0, sizeof (cl_mem), (void *)&d_mpre);
+        //ret = clSetKernelArg(kernel, 0, sizeof (cl_mem), (void *)&d_mpre);
+         ret = clSetKernelArg(kernel, 0, sizeof(int), (void *)&d_mpre);
         checkError(ret, "Setting kernel arguments");
-        ret = clSetKernelArg(kernel, 1, sizeof (cl_mem), (void *)&d_mres);
+        //ret = clSetKernelArg(kernel, 1, sizeof (cl_mem), (void *)&d_mres);
+         ret = clSetKernelArg(kernel, 0, sizeof(int), (void *)&d_mres);
         checkError(ret, "Setting kernel arguments");
         ret = clSetKernelArg(kernel, 2, sizeof(int), &indiceAlfabeto);
         checkError(ret, "Setting kernel arguments");
