@@ -30,7 +30,9 @@ int main(int argc, char *argv[])
     //int thread_count = TAM/2;
     for(int block_count = 150; block_count <= BLOCKS; block_count=block_count+50){
         if(block_count == 52) block_count = 50;
-        for(int thread_count= block_count; thread_count <= NUMTHREADS; thread_count=thread_count+100 ){
+        int inicio = block_count;
+        if(block_count%50 == 0) inicio +=50;
+        for(int thread_count= inicio; thread_count <= NUMTHREADS; thread_count=thread_count+100 ){
             //for (int i = 2; i <= TAM;){
 
                 int threadsPerBlock = thread_count/block_count;
