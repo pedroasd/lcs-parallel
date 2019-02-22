@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
     //int block_count = BLOCKS;
     //int thread_count = NUMTHREADS;
     //int thread_count = TAM/2;
-    for(int block_count = 200; block_count <= BLOCKS; block_count=block_count+100){
+    for(int block_count = 100; block_count <= BLOCKS; block_count=block_count+50){
         if(block_count == 52) block_count = 50;
         for(int thread_count= block_count; thread_count <= NUMTHREADS; thread_count=thread_count+100 ){
             //for (int i = 2; i <= TAM;){
@@ -287,7 +287,7 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
         checkError(ret, "Setting kernel arguments");
         
         //clEnqueueWriteBuffer(command_queue, pi, CL_TRUE, 0, 1, &h_pi, 0, NULL, NULL);
-        size_t global_work_size = thread_count;
+        size_t global_work_size = threads;
         size_t local_work_size = threadsPerBlock;
         cl_uint work_dim = 1;
         /* Execute OpenCL Kernel */
