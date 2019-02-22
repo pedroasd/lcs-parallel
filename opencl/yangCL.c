@@ -25,18 +25,15 @@ void rand_string(char *str, size_t size);
 int main(int argc, char *argv[])
 {   
     int i = TAM;
-    int block_count = BLOCKS;
-    int thread_count = NUMTHREADS;
+    //int block_count = BLOCKS;
+    //int thread_count = NUMTHREADS;
     //int thread_count = TAM/2;
-    printf("tbaaa");
     for(int block_count = 2; block_count <= BLOCKS; block_count=block_count+50){
-        //if(block_count == 52) block_count = 50; 
-        printf("tbbb");
+        if(block_count == 52) block_count = 50; 
         for(int thread_count= 100; thread_count <= NUMTHREADS; thread_count=thread_count+100 ){
             //for (int i = 2; i <= TAM;){
 
                 int threadsPerBlock = thread_count/block_count;
-                printf("tb: %d",threadsPerBlock);
                 if(threadsPerBlock <= MAX_THREADS_BLOCK){
 
                     double begin = omp_get_wtime();
