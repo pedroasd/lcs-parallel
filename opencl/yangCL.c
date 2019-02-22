@@ -256,7 +256,7 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
     d_mres = clCreateBuffer(context, CL_MEM_READ_WRITE, sz_mres, NULL, &ret);
     checkError(ret, "Creating buffer d_mres");
 
-    
+    //clEnqueueWriteBuffer (command_queue, d_b, CL_FALSE, 0, sizeof(char)*strlen(b), b, 0, NULL, NULL);
     /******************************************************************************/
     /* create build program */
 
