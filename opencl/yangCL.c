@@ -24,7 +24,7 @@ void rand_string(char *str, size_t size);
 
 int main(int argc, char *argv[])
 {   
-    int i = 1.5e3;//TAM;
+    int i = 1.5e2;//TAM;
     int block_count = 20;//BLOCKS;
     int thread_count = 100;//NUMTHREADS;
     //int thread_count = TAM/2;
@@ -286,6 +286,11 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
     int threads = block_count * threadsPerBlock;
     printf("B;%d;N;%d;TB;%d\n", block_count,thread_count, threadsPerBlock);
 
+    //clEnqueueWriteBuffer(command_queue, pi, CL_TRUE, 0, 1, &h_pi, 0, NULL, NULL);
+    global_work_size = thread_count;
+    local_work_size = threadsPerBlock;
+    work_dim = 1;
+
     for (int i = 0; i <= m; i++)
     {
         int indiceAlfabeto = buscarIndice(alfabeto, *(a + i - 1));
@@ -293,7 +298,7 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
         /* Set OpenCL Kernel Parameters */
         ret = clSetKernelArg(kernel, 0, sizeof (cl_mem), (void *)&d_mpre);
         checkError(ret, "Setting kernel arguments");
-        ret = clSetKernelArg(kernel, 1, sz_mres, (void *)&d_mres);
+        ret = clSetKernelArg(kernel, 1, sizeof (cl_mem), (void *)&d_mres);
         checkError(ret, "Setting kernel arguments");
         ret = clSetKernelArg(kernel, 2, sizeof(int), &indiceAlfabeto);
         checkError(ret, "Setting kernel arguments");
@@ -304,10 +309,7 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
         ret = clSetKernelArg(kernel, 5, sizeof(int), &threads);
         checkError(ret, "Setting kernel arguments");
         
-        //clEnqueueWriteBuffer(command_queue, pi, CL_TRUE, 0, 1, &h_pi, 0, NULL, NULL);
-        global_work_size = thread_count;
-        local_work_size = threadsPerBlock;
-        work_dim = 1;
+        
         /* Execute OpenCL Kernel */
         //ret = clEnqueueTask(command_queue, kernel, 0, NULL,NULL);  //single work item
         ret = clEnqueueNDRangeKernel(command_queue, kernel, work_dim,
