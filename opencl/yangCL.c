@@ -37,6 +37,7 @@ int main(int argc, char *argv[])
             //for (int i = 2; i <= TAM;){
 
                 int threadsPerBlock = thread_count/block_count;
+                printf("tpb:%d\n", threadsPerBlock);
                 if(threadsPerBlock <= MAX_THREADS_BLOCK){
 
                     double begin = omp_get_wtime();
@@ -70,7 +71,7 @@ int main(int argc, char *argv[])
             //}
         }
     }
-    printf("Chao");
+    printf("Chao\n");
     return 0;
 }
 
