@@ -24,9 +24,9 @@ void rand_string(char *str, size_t size);
 
 int main(int argc, char *argv[])
 {   
-    int i = 1.5e2;//TAM;
-    int block_count = 20;//BLOCKS;
-    int thread_count = 100;//NUMTHREADS;
+    int i = TAM;
+    int block_count = BLOCKS;
+    int thread_count = NUMTHREADS;
     //int thread_count = TAM/2;
     //for(int block_count = 2; block_count <= BLOCKS; block_count=block_count+50){
         //for(int thread_count= block_count; thread_count <= NUMTHREADS; thread_count=thread_count+50 ){
@@ -40,10 +40,6 @@ int main(int argc, char *argv[])
                     char *b = "ABACAEMC";
                     //char *a = rand_string_alloc(i);
                     //char *b = rand_string_alloc(i);
-
-                    //char *a = "PPLRBBMQBHCDARZOWKKYHIDDQSCDXRJMOWFRXSJYBLDBEFSARCBYNECDYGGXXPKLORELLNMPAPQFWKHOPKMCOQHNWNKUEWHSQMGBBUQCLJJIVSWMDKQTBXIXMVTRRBLJPTNSNFWZQFJMAFADRRWSOFSBCNUVQHFFBSAQXWPQCACEHCHZVFRKMLNOZJKPQPXRJXKITZYXACBHHKICQCOENDTOMFGDWDWFCGPXIQVKUYTDLCGDEWHTACIOHORDTQKVWCSGSPQOQMSBOAGUWNNYQXNZLGDGWPBTRWBLNSADEUGUUMOQCDRUBETOKYXHOACHWDVMXXRDRYXLMNDQTUKWAGMLEJUUKWCIBXUBUMENMEYATDRMYDIAJXLOGHIQFMZHLVIHJOUVSUYOYPAYULYEIMUOTEHZRIICFSKPGGKBBIPZZRZUCXAMLUDFYKGRUOWZGIOOOBPPLEQLWPHAPJNADQHDCNVWDTXJBMYPPPHAUXNSPUSGDHIIXQMBFJXJCVUDJSUYIBYEBMWSIQYOYGYXYMZEVYPZVJEGEBEOCFUFTSXDIXTIGSIEEHKCHZDFLILRJQFNXZTQRSVBSPKYHSENBPPKQTPDDBUOTBBQCWIVRFXJUJJDDNTGEIQVDGAIJVWCYAUBWEWPJVYGEHLJXEPBPIWUQZDZUBDUBZVAFSPQPQWUZIFWOVYDDWYVVBURCZMGYJGFDXVTNUNNESLSPLWUIUPFXLZBKNHKWPPANLTCFIRJCDDSOZOYVEGURFWCSFMOXEQMRJOWRGHWLKOBMEAHKGCCNAEHHSVEYMQPXHLRNUNYFDZRHBASJEUYGAFOUBUTPNIMUWFJQSJXVKQDORXXVRWCTDSNEOGVBPKXLPGDIRBFCRIQIFPGYNKRREFXSNVUCFTPWCTGTWMXNUPYCFGCUQUNUBLMOIITNCKLEFSZBEXRAMPETVHQNDDJEQVUYGPNKAZQFRPJVOAXDPCWMJOBMSKSKFOJNEWXGXNNOFWLTWJWNNVBWJCKDMEOUUZHYVHGVWUJBQXXPITCVOGRAIDDVHRRDSYCQHKLEEWHXTEMBAQWQWPQHSUEBNVFGVJWDVJJAFQZZXLCXDZNCQGJLAPOPKVXFGVICETCMKBLJOPGTQVVHBGSDVIVHESNKQXMWRQIDRVMHLUBBRYKTHEYENTMROBDEYQCRGLUAIIHVEIXWJJRQOPUBJGUXHXDIPFZWSWYBGFYLQVJZHARVRLYAUUZDRCNJKPHCLFFRKEECBPDIPUFHIDJCXJHRNXCXMJCXOHQANXDRMGZEBHNLMWPMHWDVTHSFQUEEEXGRUJIGSKMVRZGFWVRFTWAPDTUTPBZTYGNSRXAJJNGCOMIKJZSDWSSZNOVDRUYPCNJULKFUZMXNAFAMESPCKJCAZXDRTDGYRQSCCZYBNVQQCQCJITLVCNVBMASIDZGWRAATZZWPWMFBFJKNCVKELHHZJCHPDNLUNMPPNLGJZNKEWWUYSGEFONEXPMMSBAO";
-                    //char *b  = "PMDGZQMKQZXUVTQVNXBSLQZKGLZAMZPDNSJOLVYBWXXTTQOGNRBAIAKQLLSZKHFZCONNMOQKLPEEFSNSMOUWQHODSGCFOHESYSHMGXWTOAYUVNOJDJFTQTWKBAPRIUJIMQWSPSLGVLCSAQBDBGWTBSEETTWDNFNBYJVPDJXYUZQXSTATBZPCTTHOOFREMGFKRBCVKZVGBOFTHGOJHDNAYWPNBITORAAIBEDNEZWFPDAWLOHSSVTQTKFVSYLJZLUCQXSWYQDNTDMFRTZLQSEKEJHZKSKLFEPXCHVCZYSVDGCXBBISWMEAYLZIFKTMOIKSSFXTGPOJXQIYSRSQFWQDJQNQCGDQRNLLUIEAZVMWNUUFNNXVLOYVGMLIUQANDLYAVFAUAOSNLNVACSVPIUMOIAWCQXSWKQWGXYAZNTNAIKAMEYBNUQBCQAGGXACHRYNQXQQMLFOTPQHVOKIIAMMQMVXJVBSOAIFZYXNJCBERRNMIXXSYJHOVENGBPYQRIXQGWDRYGXRXKFHICAINHWILKQMBPESZDIGZNZXTZQSJWATYCBMJAWWMNINEPFDUPLUCLTXMKPVGRRGTUSEURAGELTKCAPWPBQROMQAWIXEZQKVLFBHWCOCPJMRMBPBEGVSULUQTUUVKESVJTDHVTJMEXFQBVUFDPAXCWNWQJTBPLYZEDICWSODPWTQRPYUEARHWGFNPAQELOFRSOTQIKTXIPQZEQVLQMUOUBBJBRPMIXFCLBSTNOSVDKUJCPWSDQHXRKIUEZIOWOQJPIECWXXBJTNMKJGNCPMVAUQGTAUSOKBFUGJTFIUQBJCLVLAZAMUCIMICNEWDOXJLFUEMDADGKHUFSUEVJAXRNIVCORHFRQQWNUJQUOYEVSLQPRLYSKRHUNLJGSOXLEUYYFQUTOZQHMGYETYYEPFAESJLKZIVDEVDLLYGAZXJNDJRXHRDYYDDQNQDOAYSHWXSHXZJYWUMBFFAMXDNXJQOYIRMIRERNEKXDLICJFQKKVNXUQMSZCIXMZKWSQOIWYFALPEUUUGFRTEOMQINUQNIRXELPSTOSAODQSZKOGRFBXTNPDBLTQTMPYYEQTUJUIOKCOWSWQYXNTNDXQQSGKHVIHBAAWJUGAGLODDKTDJIZYNYOESUOZRYITYJRIFXIMKYROKKTVUSUIQIOJFCKYATRYEKIJKSVUSOKCYEAVWUFPCTAJXKIXDBXJMITWCQQXFBBFHBADVFUAAUJXFRWKVUUHEPDIFVFKYHSFIULEAFGAAPAHJWTESPLWEQFMNMYMTQRELEINKOPMFPVOMQUEGHDMXKYNWXZQNSWAXGNJWDXBUUSGKMNQWQDVADIWAHOQAKQZQGKMLHQFDIMNWZGSPLOROWNPGEHIOXHHFRVQALWDTKSSLYKAJATAXGPDMYLDXUKDNFTPRRUMBMEMLROWRHWOQNTCLGHLCRORZHGSBAECPLPCCDYVNXMDMFHAOPLQIZKHIQBJTIMITDKXIKS";
- 
                     int m = strlen(a);
                     int n = strlen(b);
                     
@@ -51,9 +47,7 @@ int main(int argc, char *argv[])
                     lcs_opencl(a, b, m, n, block_count, thread_count);
                     
                     free(a);
-                    printf("Free a\n");
                     free(b);
-                    printf("Free b\n");
                     double end = omp_get_wtime();
                     double time_spent = end - begin;
                     
@@ -209,29 +203,15 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
     ret = clEnqueueReadBuffer(command_queue, d_mpre, CL_TRUE, 0, sz_mpre, mpre, 0, NULL, NULL);
     checkError(ret, "Creating program");
     
+    //printf("Preprocesamiento finalizado\n");
+
     ret = clFlush(command_queue);
     ret = clReleaseKernel(kernel);
     ret = clReleaseProgram(program);
     ret = clReleaseMemObject(d_b);
     ret = clReleaseMemObject(d_alfabeto);
-    //free(source_str);
+    free(source_str);
     
-    //printf("Preprocesamiento finalizado\n");
-
-    // Impresión de tabla preprocesamiento.
-    /*int g = 0;
-    for (int i = 0; i < l; i++)
-    {
-        for (int j = 0; j <= n; j++)
-        {
-            printf("%d\t", *(mpre + g));
-            g++;
-        }
-        printf("\n");
-    }
-    printf("\n");   
-    */
-
     // Matriz de resultado
     int *mres;
     int sz_mres = (m + 1) * (n + 1) * sizeof(int);
@@ -256,7 +236,7 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
     d_mres = clCreateBuffer(context, CL_MEM_READ_WRITE, sz_mres, NULL, &ret);
     checkError(ret, "Creating buffer d_mres");
 
-    //clEnqueueWriteBuffer (command_queue, d_b, CL_FALSE, 0, sizeof(char)*strlen(b), b, 0, NULL, NULL);
+    
     /******************************************************************************/
     /* create build program */
 
@@ -284,23 +264,16 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
     int threadsPerBlock = thread_count/block_count;
     //int threadsPerBlock = (n/2)/block_count;
     int threads = block_count * threadsPerBlock;
-    printf("B;%d;N;%d;TB;%d\n", block_count,thread_count, threadsPerBlock);
-
-    //clEnqueueWriteBuffer(command_queue, pi, CL_TRUE, 0, 1, &h_pi, 0, NULL, NULL);
-    global_work_size = thread_count;
-    local_work_size = threadsPerBlock;
-    work_dim = 1;
+    //printf("B;%d;N;%d;TB;%d\n", block_count,thread_count, threadsPerBlock);
 
     for (int i = 0; i <= m; i++)
     {
         int indiceAlfabeto = buscarIndice(alfabeto, *(a + i - 1));
 
         /* Set OpenCL Kernel Parameters */
-        //ret = clSetKernelArg(kernel, 0, sizeof (cl_mem), (void *)&d_mpre);
-         ret = clSetKernelArg(kernel, 0, sizeof(int), (void *)&d_mpre);
+        ret = clSetKernelArg(kernel, 0, sizeof (cl_mem), (void *)&d_mpre);
         checkError(ret, "Setting kernel arguments");
-        //ret = clSetKernelArg(kernel, 1, sizeof (cl_mem), (void *)&d_mres);
-         ret = clSetKernelArg(kernel, 0, sizeof(int), (void *)&d_mres);
+        ret = clSetKernelArg(kernel, 1, sizeof (cl_mem), (void *)&d_mres);
         checkError(ret, "Setting kernel arguments");
         ret = clSetKernelArg(kernel, 2, sizeof(int), &indiceAlfabeto);
         checkError(ret, "Setting kernel arguments");
@@ -311,7 +284,10 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
         ret = clSetKernelArg(kernel, 5, sizeof(int), &threads);
         checkError(ret, "Setting kernel arguments");
         
-        
+        //clEnqueueWriteBuffer(command_queue, pi, CL_TRUE, 0, 1, &h_pi, 0, NULL, NULL);
+        size_t global_work_size = l;
+        size_t local_work_size = 1;
+        cl_uint work_dim = 1;
         /* Execute OpenCL Kernel */
         //ret = clEnqueueTask(command_queue, kernel, 0, NULL,NULL);  //single work item
         ret = clEnqueueNDRangeKernel(command_queue, kernel, work_dim,
@@ -320,13 +296,12 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
         ret = clFinish(command_queue);
         checkError(ret, "Waiting for commands to finish");
 
-        if(i > 0) break;
     }
 
     /******************************************************************************/
     /* Copy results from the memory buffer */
     ret = clEnqueueReadBuffer(command_queue, d_mres, CL_TRUE, 0, sz_mres, mres, 0, NULL, NULL);
-    checkError(ret, "Creating program");    
+    checkError(ret, "Creating program");
 
     ret = clFlush(command_queue);
     ret = clFinish(command_queue);
@@ -339,29 +314,11 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
 
     free(source_str);
 
-    printf("\n"); 
-
     //printf("Programación dinámica\n"); 
-
-    // Impresión de tabla resultado de programación dinámica.
-    int k = 0;
-    for (int i = 0; i <= m; i++)
-    {
-        //if(i == 1){
-        for (int j = 0; j <= n; j++)
-        {
-            printf("%d", *(mres + k));
-            k++;
-        }
-        printf("\n");
-        //break;
-        //}
-    }
 
     // IMPRESIÓN DE LA CADENA
     // Longitud máxima de LCS
     int index = *(mres + m * (n + 1) + n);
-    printf("index: %d\n", index);
 
     // Cadena donde se almacena una cadena LCS.
     char lcs[index + 1];
@@ -393,11 +350,9 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
 
     
     
-    printf("Tamaño: %ld\n", strlen(lcs));
+    //printf("Tamaño: %ld\n", strlen(lcs));
     free(mres);
-    printf("Free mres\n");
     free(mpre);
-    printf("Free mpre\n");
     
     /*err = cudaDeviceReset();
     if (err != cudaSuccess){
@@ -462,7 +417,7 @@ char *rand_string_alloc(size_t size)
     char *s = malloc(size + 1);
     if (s)
     {
-        rand_string(s, size + 1);
+        rand_string(s, size);
     }
     return s;
 }
