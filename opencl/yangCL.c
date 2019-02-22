@@ -293,7 +293,7 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
         /* Set OpenCL Kernel Parameters */
         ret = clSetKernelArg(kernel, 0, sizeof (cl_mem), (void *)&d_mpre);
         checkError(ret, "Setting kernel arguments");
-        ret = clSetKernelArg(kernel, 1, sizeof (cl_mem), (void *)&d_mres);
+        ret = clSetKernelArg(kernel, 1, sz_mres, (void *)&d_mres);
         checkError(ret, "Setting kernel arguments");
         ret = clSetKernelArg(kernel, 2, sizeof(int), &indiceAlfabeto);
         checkError(ret, "Setting kernel arguments");
@@ -322,7 +322,7 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
     /******************************************************************************/
     /* Copy results from the memory buffer */
     ret = clEnqueueReadBuffer(command_queue, d_mres, CL_TRUE, 0, sz_mres, mres, 0, NULL, NULL);
-    checkError(ret, "Creating program");
+    checkError(ret, "Creating program");    
 
     ret = clFlush(command_queue);
     ret = clFinish(command_queue);
