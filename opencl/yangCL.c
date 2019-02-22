@@ -24,7 +24,7 @@ void rand_string(char *str, size_t size);
 
 int main(int argc, char *argv[])
 {   
-    int i = TAM;
+    int i = 1.5e1;//TAM;
     int block_count = BLOCKS;
     int thread_count = NUMTHREADS;
     //int thread_count = TAM/2;
@@ -36,10 +36,10 @@ int main(int argc, char *argv[])
                 if(threadsPerBlock <= MAX_THREADS_BLOCK){
 
                     double begin = omp_get_wtime();
-                    char *a = "ABMDEBMA";
-                    char *b = "ABACAEMC";
-                    //char *a = rand_string_alloc(i);
-                    //char *b = rand_string_alloc(i);
+                    //char *a = "ABMDEBMA";
+                    //char *b = "ABACAEMC";
+                    char *a = rand_string_alloc(i);
+                    char *b = rand_string_alloc(i);
                     int m = strlen(a);
                     int n = strlen(b);
                     
