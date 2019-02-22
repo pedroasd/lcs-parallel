@@ -36,10 +36,10 @@ int main(int argc, char *argv[])
                 if(threadsPerBlock <= MAX_THREADS_BLOCK){
 
                     double begin = omp_get_wtime();
-                    //char *a = "ABMDEBMA";
-                    //char *b = "ABACAEMC";
-                    char *a = rand_string_alloc(i);
-                    char *b = rand_string_alloc(i);
+                    char *a = "ABMDEBMA";
+                    char *b = "ABACAEMC";
+                    //char *a = rand_string_alloc(i);
+                    //char *b = rand_string_alloc(i);
                     int m = strlen(a);
                     int n = strlen(b);
                     
@@ -285,8 +285,8 @@ void lcs_opencl(char *a, char *b, int m, int n, int block_count, int thread_coun
         checkError(ret, "Setting kernel arguments");
         
         //clEnqueueWriteBuffer(command_queue, pi, CL_TRUE, 0, 1, &h_pi, 0, NULL, NULL);
-        size_t global_work_size = l;
-        size_t local_work_size = 1;
+        size_t global_work_size = thread_count;
+        size_t local_work_size = threadsPerBlock;
         cl_uint work_dim = 1;
         /* Execute OpenCL Kernel */
         //ret = clEnqueueTask(command_queue, kernel, 0, NULL,NULL);  //single work item
